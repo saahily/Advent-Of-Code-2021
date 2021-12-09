@@ -36,4 +36,5 @@ def decode_output_digit(digit, patterns_by_length):
 def part2(entries):
     return sum([decode_output_value(entry) for entry in entries])
 
+print(part1(entries))
 print(part2(entries))
