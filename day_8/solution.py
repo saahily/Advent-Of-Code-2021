@@ -13,23 +13,23 @@ def part1(entries):
 def decode_output_value(entry):
     signal_patterns, output_value = entry.split('|')
     output_value = [set(output_digit) for output_digit in output_value.split()]
-    patterns_by_length = [filter(lambda pattern : len(pattern) == length, signal_patterns.split()) for length in range(8)]
-    return sum([decode_output_digit(output_value[3-i], patterns_by_length)*10**i for i in range(3,-1,-1)])
+    base_patterns = sorted(signal_patterns.split(), key=len)[:3]
+    return sum([decode_output_digit(output_value[3-i], base_patterns)*10**i for i in range(3,-1,-1)])
 
 # helper function - decodes single digit output value
-def decode_output_digit(digit, patterns_by_length):
+def decode_output_digit(digit, base_patterns):
     pattern_length_singletons = { 2:1, 3:7, 4:4, 7:8 }
     if len(digit) in pattern_length_singletons:
         return pattern_length_singletons[len(digit)]
-    if len(digit)==5:
-        if digit.union(patterns_by_length[3][0]) == digit:
+    if len(digit) == 5:
+        if digit.union(base_patterns[1]) == digit:
             return 3
-        if len(digit.intersection(patterns_by_length[4][0]))==3:
+        if len(digit.intersection(base_patterns[2])) == 3:
             return 5
         return 2
-    if digit.union(patterns_by_length[4][0]) == digit:
+    if digit.union(base_patterns[2]) == digit:
         return 9
-    if digit.union(patterns_by_length[2][0]) == digit:
+    if digit.union(base_patterns[0]) == digit:
         return 0
     return 6
 

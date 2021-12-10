@@ -1,10 +1,10 @@
 arr = list(map(int,open("input.txt").read().split(',')))
 
 def part1(arr):
-		n = len(arr)
-		arr.sort();
-		median = arr[(n-1)//2] if (n % 2 == 0) else arr[n//2]
-		return sum([abs(num-median) for num in arr])
+	n = len(arr)
+	arr.sort();
+	median = arr[(n-1)//2] if (n % 2 == 0) else arr[n//2]
+	return sum([abs(num-median) for num in arr])
 
 # brute force approach
 def part2(arr):
