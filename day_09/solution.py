@@ -29,7 +29,7 @@ def basin_size(low_point, map):
         r,c = queue.pop(0)
         for p in neighbors((r,c), (len(map), len(map[0]))):
             h = int(map[p[0]][p[1]])
-            if h < 9 and p not in visited and int(map[r][c]) < h:
+            if p not in visited and int(map[r][c]) < h < 9:
                 visited.add(p)
                 queue.append(p)
     return len(visited)
